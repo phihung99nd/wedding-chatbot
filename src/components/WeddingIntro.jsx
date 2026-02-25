@@ -30,9 +30,9 @@ export function WeddingIntro({ isVisible, onEnter }) {
               animate={{ letterSpacing: '0.02em' }}
               transition={{ duration: 1.4, ease: 'easeOut' }}
             >
-              <span className="whitespace-nowrap">{couple.groomName}</span>
-              <span className="text-[0.62em] leading-none text-blush-300">&amp;</span>
               <span className="whitespace-nowrap">{couple.brideName}</span>
+              <span className="text-[0.62em] leading-none text-blush-300">&amp;</span>
+              <span className="whitespace-nowrap">{couple.groomName}</span>
             </motion.h1>
 
             <p className="text-sm md:text-base text-slate-600 mb-3">

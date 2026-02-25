@@ -95,24 +95,24 @@ export const autoMessages = [
     type: 'rsvpForm',
     text: 'Vui lòng điền thông tin xác nhận tham dự:'
   },
-  {
-    id: 'gifts-1',
-    sender: 'bot',
-    type: 'gifts',
-    text: couple.giftInfo
-  },
-  {
-    id: 'gifts-2',
-    sender: 'bot',
-    type: 'gifts-details',
-    text: couple.bankDetails
-  },
-  {
-    id: 'gifts-qr',
-    sender: 'bot',
-    type: 'gifts-qr',
-    text: 'Nếu tiện hơn, bạn cũng có thể gửi mừng cưới bằng cách quét mã QR dưới đây. Dương & Linh chân thành cảm ơn tấm lòng của bạn.'
-  },
+  // {
+  //   id: 'gifts-1',
+  //   sender: 'bot',
+  //   type: 'gifts',
+  //   text: couple.giftInfo
+  // },
+  // {
+  //   id: 'gifts-2',
+  //   sender: 'bot',
+  //   type: 'gifts-details',
+  //   text: couple.bankDetails
+  // },
+  // {
+  //   id: 'gifts-qr',
+  //   sender: 'bot',
+  //   type: 'gifts-qr',
+  //   text: 'Nếu tiện hơn, bạn cũng có thể gửi mừng cưới bằng cách quét mã QR dưới đây. Dương & Linh chân thành cảm ơn tấm lòng của bạn.'
+  // },
   {
     id: 'closing-1',
     sender: 'bot',
@@ -130,7 +130,7 @@ export const quickReplies = [
     id: 'lovestory',
     label: 'Câu chuyện tình yêu của Dương & Linh',
     question: 'Câu chuyện tình yêu của Dương & Linh',
-    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc.'
+    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu đã rơi, trò chơi kết thúc.'
   },
   {
     id: 'when',
@@ -170,7 +170,7 @@ export const quickReplies = [
     id: 'album',
     label: 'Xem album ảnh cưới',
     question: 'Cho mình xem album ảnh cưới nhé!',
-    answer: 'Dưới đây là một vài khoảnh khắc tiêu biểu của Dương & Linh.',
+    answer: 'Dưới đây là một vài khoảnh khắc tiêu biểu của Dương & Linh. Hãy bấm vào từng ảnh để xem nhé!',
     type: 'album'
   }
 ];
