@@ -137,7 +137,7 @@ export function WeddingChatPage() {
   const [visibleMessages, setVisibleMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [autoIndex, setAutoIndex] = useState(0);
-  const scrollAnchorRef = useRef(null);
+  const chatScrollRef = useRef(null);
   const autoTimerRef = useRef(null);
   const quickReplyCounterRef = useRef(0);
   const { isPlaying, toggle } = useBackgroundMusic(backgroundAudioFiles);
@@ -176,8 +176,11 @@ export function WeddingChatPage() {
   }, [autoIndex, enrichedMessages]);
 
   useEffect(() => {
-    if (scrollAnchorRef.current) {
-      scrollAnchorRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTo({
+        top: chatScrollRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, [visibleMessages, isTyping]);
 
@@ -277,7 +280,10 @@ export function WeddingChatPage() {
               </button>
             </div>
 
-            <div className="h-[58vh] md:h-[60vh] max-h-[520px] overflow-y-auto px-4 pt-4 pb-5 chat-scroll">
+            <div
+              ref={chatScrollRef}
+              className="h-[58vh] md:h-[60vh] max-h-[520px] overflow-y-auto px-4 pt-4 pb-5 chat-scroll"
+            >
               {visibleMessages.map((message, index) => (
                 <MessageBubble
                   key={message.id}
@@ -298,7 +304,6 @@ export function WeddingChatPage() {
                 )}
               </AnimatePresence>
 
-              <div ref={scrollAnchorRef} />
             </div>
 
             <div className="px-4 pb-4 pt-3 bg-white/80 border-t border-white/70">
