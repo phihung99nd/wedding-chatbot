@@ -140,6 +140,7 @@ export function WeddingChatPage() {
   const chatScrollRef = useRef(null);
   const autoTimerRef = useRef(null);
   const quickReplyCounterRef = useRef(0);
+  const skippedRef = useRef(false);
   const { isPlaying, toggle } = useBackgroundMusic(backgroundAudioFiles);
   const isInitialScriptRunning = autoIndex < autoMessages.length;
 
@@ -155,7 +156,7 @@ export function WeddingChatPage() {
 
   useEffect(() => {
     const runAutoFlow = () => {
-      if (autoIndex >= enrichedMessages.length) return;
+      if (autoIndex >= enrichedMessages.length || skippedRef.current) return;
 
       setIsTyping(true);
       autoTimerRef.current = setTimeout(() => {
@@ -185,6 +186,7 @@ export function WeddingChatPage() {
   }, [visibleMessages, isTyping]);
 
   const handleSkip = () => {
+    skippedRef.current = true;
     if (autoTimerRef.current) {
       clearTimeout(autoTimerRef.current);
       autoTimerRef.current = null;
