@@ -146,7 +146,7 @@ export function WeddingChatPage() {
   const enrichedMessages = useMemo(
     () =>
       autoMessages.map((m) =>
-        m.type === 'venue'
+        m.type === 'venue' || m.type === 'dateVenue'
           ? { ...m, venueMapsUrl: couple.venueMapsUrl }
           : m
       ),
@@ -183,6 +183,16 @@ export function WeddingChatPage() {
       });
     }
   }, [visibleMessages, isTyping]);
+
+  const handleSkip = () => {
+    if (autoTimerRef.current) {
+      clearTimeout(autoTimerRef.current);
+      autoTimerRef.current = null;
+    }
+    setIsTyping(false);
+    setVisibleMessages(enrichedMessages);
+    setAutoIndex(enrichedMessages.length);
+  };
 
   const handleQuickReply = (option) => {
     if (isInitialScriptRunning) return;
@@ -238,7 +248,7 @@ export function WeddingChatPage() {
       <div className="relative z-10 w-full max-w-2xl mx-auto">
         <div className="mb-6 text-center">
           <p className="text-[0.6rem] tracking-[0.26em] uppercase text-slate-500 mb-2">
-            Chatbot Thiệp Cưới
+            Thiệp Cưới
           </p>
           <h2 className="font-display text-2xl tracking-tight text-ink">
             {couple.brideName} &amp; {couple.groomName}
@@ -255,7 +265,7 @@ export function WeddingChatPage() {
                 </span>
                 <div className="text-left">
                   <p className="text-[0.8rem] font-semibold text-ink">
-                    Trợ Lý Thiệp Cưới
+                    Bồ Câu Đưa Tin
                   </p>
                   <p className="text-[0.68rem] text-slate-400">
                     Trực tuyến
@@ -316,9 +326,18 @@ export function WeddingChatPage() {
                 disabled={isInitialScriptRunning || isTyping}
               />
               {isInitialScriptRunning && (
-                <p className="text-[0.68rem] text-slate-400 mt-2">
-                  Vui lòng chờ chatbot gửi xong phần giới thiệu...
-                </p>
+                <div className="flex items-center justify-between mt-2">
+                  <p className="text-[0.68rem] text-slate-400">
+                    Bồ câu đang đưa tin...
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleSkip}
+                    className="text-[0.68rem] font-medium text-blush-400 hover:text-blush-300 transition-colors px-2.5 py-1 rounded-full border border-blush-200/60 hover:border-blush-200 bg-white/60"
+                  >
+                    Bỏ qua »
+                  </button>
+                </div>
               )}
             </div>
           </div>

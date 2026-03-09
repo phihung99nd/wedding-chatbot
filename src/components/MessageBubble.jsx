@@ -30,7 +30,7 @@ export function MessageBubble({ message, index }) {
     ? 'bg-white/90 text-slate-800 border border-white/80'
     : 'bg-blush-100 text-ink border border-blush-200';
 
-  const nameLabel = isBot ? 'Chatbot' : 'Bạn';
+  const nameLabel = isBot ? 'Bồ Câu Đưa Tin' : 'Bạn';
 
   const openAlbumModal = (imageIndex) => {
     setActiveAlbumIndex(imageIndex);
@@ -145,8 +145,8 @@ export function MessageBubble({ message, index }) {
               Mừng Cưới
             </p>
           )}
-          <p>{message.text}</p>
-          {message.type === 'venue' && message.venueMapsUrl && (
+          <p className="whitespace-pre-line">{message.text}</p>
+          {(message.type === 'venue' || message.type === 'dateVenue') && message.venueMapsUrl && (
             <a
               href={message.venueMapsUrl}
               target="_blank"

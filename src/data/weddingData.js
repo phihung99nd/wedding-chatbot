@@ -1,5 +1,5 @@
 const albumImageModules = import.meta.glob(
-  '../assets/album/*.{png,jpg,jpeg,webp,avif,gif}',
+  '../assets/album/wed_pic/*.{png,jpg,jpeg,webp,avif,gif}',
   { eager: true, import: 'default' }
 );
 
@@ -48,52 +48,35 @@ export const autoMessages = [
   {
     id: 'bride-1',
     sender: 'bot',
-    text: `Trước tiên, hãy gặp cô dâu ${couple.brideName} - con gái của ông bà ${couple.brideDadName} & ${couple.brideMomName} và là một fangirl cuồng nhiệt của RHYDER. RHYDER (tên thật Nguyễn Quang Anh, sinh năm 2001) là nam ca sĩ, rapper và nhà sản xuất âm nhạc nổi tiếng người Việt Nam. Anh nổi danh từ năm 2013 khi giành Quán quân Giọng hát Việt nhí mùa đầu tiên, sau đó tái xuất ấn tượng tại Rap Việt mùa 3 (2023) và đạt Á quân chương trình Anh trai "say hi" (2024).`
+    text: `Trước tiên, hãy gặp cô dâu ${couple.brideName} - là một fangirl cuồng nhiệt của RHYDER. RHYDER (tên thật Nguyễn Quang Anh, sinh năm 2001) là nam ca sĩ, rapper và nhà sản xuất âm nhạc nổi tiếng người Việt Nam. Anh nổi danh từ năm 2013 khi giành Quán quân Giọng hát Việt nhí mùa đầu tiên, sau đó tái xuất ấn tượng tại Rap Việt mùa 3 (2023) và đạt Á quân chương trình Anh trai "say hi" (2024).`
   },
   {
     id: 'groom-1',
     sender: 'bot',
-    text: `Chú rể ${couple.groomName} - con trai của ông bà ${couple.groomDadName} & ${couple.groomMomName} - một kỹ sư bảo mật chuyên đóng mọi “cổng” nguy hiểm, nhưng lại mở trọn trái tim cho cô dâu. Đam mê cầu lông để rèn phản xạ, tập Kendo để giữ tinh thần samurai, và sắp tới sẽ học thêm kỹ năng mới: làm chồng chuẩn chỉnh.`
+    text: `Chú rể ${couple.groomName} - một kỹ sư bảo mật chuyên đóng mọi “cổng” nguy hiểm, nhưng lại mở trọn trái tim cho cô dâu. Đam mê cầu lông để rèn phản xạ, tập Kendo để giữ tinh thần samurai, và sắp tới sẽ học thêm kỹ năng mới: làm chồng chuẩn chỉnh.`
   },
   {
     id: 'story-1',
     sender: 'bot',
-    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc.'
-  },
-  {
-    id: 'story-2',
-    sender: 'bot',
-    text: 'Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
+    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
   },
   {
     id: 'when-where-1',
     sender: 'bot',
     type: 'dateVenue',
-    text: `Hôn lễ sẽ diễn ra vào ${couple.date} lúc ${couple.time}, tại ${couple.venueName}.`
+    text: `Hôn lễ sẽ diễn ra vào ${couple.date} lúc ${couple.time}, tại ${couple.venueName}.\nĐịa chỉ: ${couple.venueAddress}`
   },
-  {
-    id: 'when-where-2',
-    sender: 'bot',
-    type: 'venue',
-    text: `${couple.venueAddress}`
-  },
-  {
-    id: 'dresscode-1',
-    sender: 'bot',
-    type: 'dresscode',
-    text: `Trang phục gợi ý: ${couple.dressCode}`
-  },
+  // {
+  //   id: 'dresscode-1',
+  //   sender: 'bot',
+  //   type: 'dresscode',
+  //   text: `Trang phục gợi ý: ${couple.dressCode}`
+  // },
   {
     id: 'rsvp-1',
     sender: 'bot',
-    type: 'rsvp',
-    text: 'Bạn có thể xác nhận tham dự ngay trong ô chat bên dưới bằng cách nhập tên và số điện thoại hoặc email.'
-  },
-  {
-    id: 'rsvp-form-1',
-    sender: 'bot',
     type: 'rsvpForm',
-    text: 'Vui lòng điền thông tin xác nhận tham dự:'
+    text: 'Bạn có thể xác nhận tham dự ngay bên dưới. Vui lòng điền thông tin:'
   },
   // {
   //   id: 'gifts-1',
@@ -116,12 +99,7 @@ export const autoMessages = [
   {
     id: 'closing-1',
     sender: 'bot',
-    text: 'Cảm ơn bạn vì đã là một phần trong câu chuyện của Dương & Linh. Ngày hôm đó sẽ không trọn vẹn nếu thiếu bạn.'
-  },
-  {
-    id: 'closing-2',
-    sender: 'bot',
-    text: 'Chúng mình rất mong được gặp bạn và cùng nhau nâng ly trong ngày 28.03.2026.'
+    text: 'Cảm ơn bạn vì đã là một phần trong câu chuyện của Dương & Linh. Ngày hôm đó sẽ không trọn vẹn nếu thiếu bạn. Chúng mình rất mong được gặp bạn và cùng nhau nâng ly trong ngày 28.03.2026.'
   }
 ];
 
