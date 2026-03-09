@@ -24,7 +24,8 @@ export const couple = {
   rsvpEmail: 'rsvp@ameliaandliam.com',
   rsvpSheetUrl:
     'https://docs.google.com/spreadsheets/d/YOUR_RSVP_SHEET_ID_HERE/edit?usp=sharing',
-  rsvpFormEndpoint: '',
+  // Paste Google Apps Script Web App URL here (see scripts/google-apps-script.js)
+  rsvpFormEndpoint: 'https://script.google.com/macros/s/AKfycbxqLnGzq_4tdjuQaDiO1mCOhBmrt7QnMIk-JBxWDexyWghPei5a2oiD78h4ZI7RL4Pp/exec',
   wishesLink: 'https://example.com/send-wishes',
   giftInfo:
     'Sự hiện diện của bạn đã là món quà quý giá nhất. Nếu vẫn muốn gửi mừng cưới, bạn có thể chuyển khoản theo thông tin bên dưới để góp phần xây dựng tổ ấm nhỏ của Dương & Linh.',

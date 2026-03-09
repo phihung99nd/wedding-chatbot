@@ -73,18 +73,17 @@ export function MessageBubble({ message, index }) {
       if (couple.rsvpFormEndpoint) {
         const response = await fetch(couple.rsvpFormEndpoint, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             name: rsvpName.trim(),
             phone: rsvpPhone.trim(),
             email: rsvpEmail.trim(),
             note: rsvpNote.trim()
-          })
+          }),
+          redirect: 'follow'
         });
 
-        if (!response.ok) {
+        if (!response.ok && response.type !== 'opaque') {
           throw new Error('submit_failed');
         }
       }
