@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Viewer from 'viewerjs';
+import 'viewerjs/dist/viewer.css';
 import { couple } from '../data/weddingData';
 
 const bubbleVariants = {
@@ -10,8 +12,6 @@ const bubbleVariants = {
 export function MessageBubble({ message, index }) {
   const isBot = message.sender === 'bot';
   const isGuest = message.sender === 'guest';
-  const [isAlbumModalOpen, setIsAlbumModalOpen] = React.useState(false);
-  const [activeAlbumIndex, setActiveAlbumIndex] = React.useState(0);
   const [rsvpName, setRsvpName] = React.useState('');
   const [rsvpPhone, setRsvpPhone] = React.useState('');
   const [rsvpEmail, setRsvpEmail] = React.useState('');
@@ -19,6 +19,8 @@ export function MessageBubble({ message, index }) {
   const [rsvpError, setRsvpError] = React.useState('');
   const [rsvpSubmitting, setRsvpSubmitting] = React.useState(false);
   const [rsvpSuccess, setRsvpSuccess] = React.useState(false);
+  const albumViewerRef = React.useRef(null);
+  const albumViewerInstanceRef = React.useRef(null);
 
   const albumImages = Array.isArray(message.albumImages) ? message.albumImages : [];
   const previewImages = albumImages.slice(0, 4);
@@ -32,26 +34,39 @@ export function MessageBubble({ message, index }) {
 
   const nameLabel = isBot ? 'Bồ Câu Đưa Tin' : 'Bạn';
 
-  const openAlbumModal = (imageIndex) => {
-    setActiveAlbumIndex(imageIndex);
-    setIsAlbumModalOpen(true);
+  const openAlbumViewer = (imageIndex) => {
+    const container = albumViewerRef.current;
+    if (!container || albumImages.length === 0) {
+      return;
+    }
+
+    if (!albumViewerInstanceRef.current) {
+      albumViewerInstanceRef.current = new Viewer(container, {
+        inline: false,
+        button: true,
+        navbar: true,
+        toolbar: true,
+        title: false,
+        transition: true,
+        fullscreen: true
+      });
+    }
+
+    albumViewerInstanceRef.current.view(imageIndex);
   };
 
-  const closeAlbumModal = () => {
-    setIsAlbumModalOpen(false);
-  };
+  React.useEffect(() => {
+    if (albumViewerInstanceRef.current) {
+      albumViewerInstanceRef.current.update();
+    }
+  }, [albumImages]);
 
-  const goToPrevImage = () => {
-    setActiveAlbumIndex((prev) =>
-      prev === 0 ? albumImages.length - 1 : prev - 1
-    );
-  };
-
-  const goToNextImage = () => {
-    setActiveAlbumIndex((prev) =>
-      prev === albumImages.length - 1 ? 0 : prev + 1
-    );
-  };
+  React.useEffect(() => () => {
+    if (albumViewerInstanceRef.current) {
+      albumViewerInstanceRef.current.destroy();
+      albumViewerInstanceRef.current = null;
+    }
+  }, []);
 
   const handleRsvpSubmit = async (event) => {
     event.preventDefault();
@@ -233,7 +248,7 @@ export function MessageBubble({ message, index }) {
                   <button
                     key={`${imageUrl}-${idx}`}
                     type="button"
-                    onClick={() => openAlbumModal(idx)}
+                    onClick={() => openAlbumViewer(idx)}
                     className="relative rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-blush-300"
                   >
                     <img
@@ -251,73 +266,20 @@ export function MessageBubble({ message, index }) {
                 ))}
               </div>
             )}
+          {message.type === 'album' && albumImages.length > 0 && (
+            <div ref={albumViewerRef} className="hidden" aria-hidden="true">
+              {albumImages.map((imageUrl, idx) => (
+                <img
+                  key={`${imageUrl}-viewer-${idx}`}
+                  src={imageUrl}
+                  alt={`Ảnh cưới ${idx + 1}`}
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
-
-      {message.type === 'album' && isAlbumModalOpen && albumImages.length > 0 && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-4xl bg-white/95 rounded-2xl overflow-hidden shadow-soft">
-            <button
-              type="button"
-              onClick={closeAlbumModal}
-              className="absolute right-3 top-3 z-10 h-8 w-8 rounded-full bg-white/90 text-slate-700 border border-slate-200 hover:bg-white"
-            >
-              ×
-            </button>
-
-            <div className="relative bg-slate-900">
-              <img
-                src={albumImages[activeAlbumIndex]}
-                alt={`Ảnh cưới ${activeAlbumIndex + 1}`}
-                className="w-full max-h-[65vh] object-contain"
-              />
-
-              {albumImages.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={goToPrevImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/45 text-white hover:bg-black/60"
-                  >
-                    ‹
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goToNextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/45 text-white hover:bg-black/60"
-                  >
-                    ›
-                  </button>
-                </>
-              )}
-            </div>
-
-            <div className="p-3 border-t border-slate-200 bg-white">
-              <div className="flex gap-2 overflow-x-auto">
-                {albumImages.map((thumb, idx) => (
-                  <button
-                    key={`${thumb}-thumb-${idx}`}
-                    type="button"
-                    onClick={() => setActiveAlbumIndex(idx)}
-                    className={`rounded-lg overflow-hidden border ${
-                      idx === activeAlbumIndex
-                        ? 'border-blush-300'
-                        : 'border-slate-200'
-                    }`}
-                  >
-                    <img
-                      src={thumb}
-                      alt={`Ảnh thu nhỏ ${idx + 1}`}
-                      className="w-16 h-16 object-cover"
-                      loading="lazy"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </motion.div>
   );
 }
