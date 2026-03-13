@@ -158,13 +158,16 @@ export function WeddingChatPage() {
     const runAutoFlow = () => {
       if (autoIndex >= enrichedMessages.length || skippedRef.current) return;
 
+      const next = enrichedMessages[autoIndex];
+      const charCount = (next.text || '').length;
+      const delay = Math.min(Math.max(charCount * 15, 1200), 4000);
+
       setIsTyping(true);
       autoTimerRef.current = setTimeout(() => {
-        const next = enrichedMessages[autoIndex];
         setVisibleMessages((prev) => [...prev, next]);
         setIsTyping(false);
         setAutoIndex((idx) => idx + 1);
-      }, 2000);
+      }, delay);
     };
 
     runAutoFlow();
@@ -176,14 +179,7 @@ export function WeddingChatPage() {
     };
   }, [autoIndex, enrichedMessages]);
 
-  useEffect(() => {
-    if (chatScrollRef.current) {
-      chatScrollRef.current.scrollTo({
-        top: chatScrollRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  }, [visibleMessages, isTyping]);
+  /* No auto-scroll – let the user scroll at their own pace */
 
   const handleSkip = () => {
     skippedRef.current = true;
@@ -263,7 +259,7 @@ export function WeddingChatPage() {
             <div className="flex items-center justify-between px-5 py-3 border-b border-white/70 bg-white/70">
               <div className="flex items-center gap-2">
                 <span className="inline-flex h-8 w-8 rounded-full bg-blush-100 border border-blush-200 items-center justify-center text-xs font-medium text-blush-400">
-                  D&amp;L
+                  LD
                 </span>
                 <div className="text-left">
                   <p className="text-[0.8rem] font-semibold text-ink">
@@ -275,21 +271,32 @@ export function WeddingChatPage() {
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={handleToggleSound}
-                disabled={!hasBackgroundAudio}
-                className="inline-flex items-center justify-center h-8 px-3 rounded-full text-[0.7rem] border border-slate-200/80 bg-white/70 text-slate-500 hover:bg-blush-50 hover:border-blush-100 transition-colors"
-              >
-                <span className="mr-1 text-[0.85rem]">
-                  {isPlaying ? '♪' : '♬'}
-                </span>
-                {!hasBackgroundAudio
-                  ? 'Không có nhạc'
-                  : isPlaying
-                  ? 'Tắt nhạc'
-                  : 'Bật nhạc'}
-              </button>
+              <div className="flex items-center gap-1.5">
+                {isInitialScriptRunning && (
+                  <button
+                    type="button"
+                    onClick={handleSkip}
+                    className="hidden md:inline-flex items-center justify-center h-8 px-3 rounded-full text-[0.7rem] border border-blush-200/80 bg-white/70 text-blush-400 hover:bg-blush-50 hover:border-blush-200 transition-colors"
+                  >
+                    Tua nhanh »
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={handleToggleSound}
+                  disabled={!hasBackgroundAudio}
+                  className="inline-flex items-center justify-center h-8 px-3 rounded-full text-[0.7rem] border border-slate-200/80 bg-white/70 text-slate-500 hover:bg-blush-50 hover:border-blush-100 transition-colors"
+                >
+                  <span className="mr-1 text-[0.85rem]">
+                    {isPlaying ? '♪' : '♬'}
+                  </span>
+                  {!hasBackgroundAudio
+                    ? 'Không có nhạc'
+                    : isPlaying
+                    ? 'Tắt nhạc'
+                    : 'Bật nhạc'}
+                </button>
+              </div>
             </div>
 
             <div
@@ -327,20 +334,6 @@ export function WeddingChatPage() {
                 onSelect={handleQuickReply}
                 disabled={isInitialScriptRunning || isTyping}
               />
-              {isInitialScriptRunning && (
-                <div className="flex items-center justify-between mt-2">
-                  <p className="text-[0.68rem] text-slate-400">
-                    Bồ câu đang đưa tin...
-                  </p>
-                  <button
-                    type="button"
-                    onClick={handleSkip}
-                    className="text-[0.68rem] font-medium text-blush-400 hover:text-blush-300 transition-colors px-2.5 py-1 rounded-full border border-blush-200/60 hover:border-blush-200 bg-white/60"
-                  >
-                    Bỏ qua »
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>

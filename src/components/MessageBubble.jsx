@@ -19,6 +19,7 @@ export function MessageBubble({ message, index }) {
   const [rsvpError, setRsvpError] = React.useState('');
   const [rsvpSubmitting, setRsvpSubmitting] = React.useState(false);
   const [rsvpSuccess, setRsvpSuccess] = React.useState(false);
+  const [zoomedQr, setZoomedQr] = React.useState(null);
   const albumViewerRef = React.useRef(null);
   const albumViewerInstanceRef = React.useRef(null);
 
@@ -230,16 +231,84 @@ export function MessageBubble({ message, index }) {
           )}
           {(message.type === 'gifts-qr' ||
             (message.type === 'gifts' && message.showGiftQr)) &&
-            couple.giftQrUrl && (
-            <div className="mt-3 flex flex-col items-center">
-              <img
-                src={couple.giftQrUrl}
-                alt="Mã QR mừng cưới"
-                className="w-32 h-32 md:w-40 md:h-40 rounded-xl border border-blush-100 shadow-sm bg-white"
-              />
-              <p className="mt-2 text-[0.7rem] text-slate-400 text-center">
-                Quét mã để gửi mừng cưới yêu thương.
+            couple.giftQrImages?.length > 0 && (
+            <div className="mt-3">
+              <div className="grid grid-cols-2 gap-2">
+                {couple.giftQrImages.map((qr) => (
+                  <button
+                    key={qr.label}
+                    type="button"
+                    onClick={() => setZoomedQr(qr)}
+                    className="flex flex-col items-center group cursor-pointer"
+                  >
+                    <div className="aspect-square w-full rounded-xl border border-blush-100 shadow-sm bg-white overflow-hidden">
+                      <img
+                        src={qr.src}
+                        alt={`QR ${qr.label}`}
+                        className="w-full h-full object-contain p-1"
+                      />
+                    </div>
+                    <p className="mt-1.5 text-[0.7rem] font-medium text-slate-500 group-hover:text-blush-400 transition-colors">{qr.label}</p>
+                  </button>
+                ))}
+              </div>
+              <p className="mt-2 text-[0.7rem] text-slate-400 text-center italic">
+                Bấm vào ảnh để phóng to nha các tình yêu 💕
               </p>
+            </div>
+          )}
+
+          {zoomedQr && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+              onClick={() => setZoomedQr(null)}
+            >
+              <div
+                className="relative mx-4 max-w-xs w-full bg-white rounded-2xl shadow-2xl p-4 flex flex-col items-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={() => setZoomedQr(null)}
+                  className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-700 transition-colors text-lg leading-none"
+                  aria-label="Đóng"
+                >
+                  ×
+                </button>
+                <img
+                  src={zoomedQr.src}
+                  alt={`QR ${zoomedQr.label}`}
+                  className="w-full aspect-square object-contain rounded-xl"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    img.onload = () => {
+                      const canvas = document.createElement('canvas');
+                      canvas.width = img.naturalWidth;
+                      canvas.height = img.naturalHeight;
+                      canvas.getContext('2d').drawImage(img, 0, 0);
+                      canvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `QR-${zoomedQr.label}.jpg`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                      }, 'image/jpeg', 0.95);
+                    };
+                    img.src = zoomedQr.src;
+                  }}
+                  className="mt-3 inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-medium bg-blush-100 border border-blush-200 text-ink hover:bg-blush-50 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Tải ảnh
+                </button>
+              </div>
             </div>
           )}
           {message.type === 'album' && previewImages.length > 0 && (
