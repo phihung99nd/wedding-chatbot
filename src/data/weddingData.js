@@ -32,6 +32,10 @@ export const couple = {
   bankDetails: 'STK: XXXX XXXX XXXX · Ngân hàng: ABC',
   giftQrUrl:
     'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=Tran%20Thai%20Duong%20%26%20Nguyen%20Khanh%20Linh%20Wedding%20Gift',
+  giftQrImages: [
+    { src: new URL('../assets/qr/duong.jpg', import.meta.url).href, label: 'Dương' },
+    { src: new URL('../assets/qr/linh.jpg', import.meta.url).href, label: 'Linh' }
+  ],
   albumImages: albumImagesFromAssets
 };
 
@@ -49,7 +53,7 @@ export const autoMessages = [
   {
     id: 'bride-1',
     sender: 'bot',
-    text: `Trước tiên, hãy gặp cô dâu ${couple.brideName} - là một fangirl cuồng nhiệt của RHYDER. RHYDER (tên thật Nguyễn Quang Anh, sinh năm 2001) là nam ca sĩ, rapper và nhà sản xuất âm nhạc nổi tiếng người Việt Nam. Anh nổi danh từ năm 2013 khi giành Quán quân Giọng hát Việt nhí mùa đầu tiên, sau đó tái xuất ấn tượng tại Rap Việt mùa 3 (2023) và đạt Á quân chương trình Anh trai "say hi" (2024).`
+    text: `Trước tiên, hãy gặp cô dâu ${couple.brideName} - một nhân viên ngân hàng tập sự và cũng là fangirl chân chính của Quang Anh RHYDER. Cô dâu bước vào cuộc đời chú rể, mang theo làn gió "hip hop never die" thổi vào cuộc sống IT vốn hơi khô khan. Và cũng từ đây, cô dâu sẽ được "đào tạo" những kỹ năng để trở thành một banker chuẩn chỉnh, mà bài học tài chính đầu tiên chính là: Quản lý toàn bộ tiền lương của chồng.`
   },
   {
     id: 'groom-1',
@@ -141,7 +145,7 @@ export const quickReplies = [
     id: 'gifts',
     label: 'Thông tin mừng cưới',
     question: 'Mình có thể gửi mừng cưới như thế nào?',
-    answer: `${couple.giftInfo} Thông tin chuyển khoản: ${couple.bankDetails}`,
+    answer: couple.giftInfo,
     type: 'gifts',
     showGiftQr: true
   },
