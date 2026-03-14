@@ -179,7 +179,14 @@ export function WeddingChatPage() {
     };
   }, [autoIndex, enrichedMessages]);
 
-  /* No auto-scroll – let the user scroll at their own pace */
+  const scrollToBottom = () => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTo({
+        top: chatScrollRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const handleSkip = () => {
     skippedRef.current = true;
@@ -224,10 +231,12 @@ export function WeddingChatPage() {
 
     setVisibleMessages((prev) => [...prev, questionMessage]);
     setIsTyping(true);
+    setTimeout(() => scrollToBottom(), 50);
 
     setTimeout(() => {
       setVisibleMessages((prev) => [...prev, answerMessage]);
       setIsTyping(false);
+      setTimeout(() => scrollToBottom(), 50);
     }, 650);
   };
 
@@ -276,25 +285,30 @@ export function WeddingChatPage() {
                   <button
                     type="button"
                     onClick={handleSkip}
-                    className="hidden md:inline-flex items-center justify-center h-8 px-3 rounded-full text-[0.7rem] border border-blush-200/80 bg-white/70 text-blush-400 hover:bg-blush-50 hover:border-blush-200 transition-colors"
+                    className="inline-flex items-center justify-center h-8 w-8 md:w-auto md:px-3 rounded-full text-[0.7rem] border border-slate-200/60 bg-white/50 text-slate-400 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+                    title="Tua nhanh"
                   >
-                    Tua nhanh »
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4 5v14l11-7z"/><rect x="18" y="5" width="2" height="14" rx="1"/></svg>
+                    <span className="hidden md:inline ml-1">Tua nhanh</span>
                   </button>
                 )}
                 <button
                   type="button"
                   onClick={handleToggleSound}
                   disabled={!hasBackgroundAudio}
-                  className="inline-flex items-center justify-center h-8 px-3 rounded-full text-[0.7rem] border border-slate-200/80 bg-white/70 text-slate-500 hover:bg-blush-50 hover:border-blush-100 transition-colors"
+                  className="inline-flex items-center justify-center h-8 w-8 md:w-auto md:px-3 rounded-full text-[0.7rem] border border-blush-200 bg-blush-50/80 text-blush-400 hover:bg-blush-100 hover:border-blush-300 transition-colors"
+                  title={isPlaying ? 'Tắt nhạc' : 'Bật nhạc'}
                 >
-                  <span className="mr-1 text-[0.85rem]">
+                  <span className="text-[0.85rem]">
                     {isPlaying ? '♪' : '♬'}
                   </span>
-                  {!hasBackgroundAudio
-                    ? 'Không có nhạc'
-                    : isPlaying
-                    ? 'Tắt nhạc'
-                    : 'Bật nhạc'}
+                  <span className="hidden md:inline ml-1">
+                    {!hasBackgroundAudio
+                      ? 'Không có nhạc'
+                      : isPlaying
+                      ? 'Tắt nhạc'
+                      : 'Bật nhạc'}
+                  </span>
                 </button>
               </div>
             </div>
