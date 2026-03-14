@@ -63,7 +63,7 @@ export const autoMessages = [
   {
     id: 'story-1',
     sender: 'bot',
-    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Đùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
+    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc.\nĐùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau.\nGiờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
   },
   {
     id: 'when-where-1',
@@ -113,7 +113,7 @@ export const quickReplies = [
     id: 'lovestory',
     label: 'Câu chuyện tình yêu',
     question: 'Câu chuyện tình yêu của Linh & Dương',
-    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Đùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
+    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc.\nĐùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau.\nGiờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
   },
   {
     id: 'when',
