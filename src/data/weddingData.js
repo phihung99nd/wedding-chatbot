@@ -14,13 +14,13 @@ export const couple = {
   groomMomName: '???',
   brideDadName: '???',
   brideMomName: '???',
-  date: 'Ngày 28 tháng 03 năm 2026',
+  date: 'Thứ Bảy, ngày 28 tháng 03 năm 2026',
   time: '11:00 Sáng',
   venueName: 'Queen Bee Luxury',
   venueAddress: '20 Láng Hạ - Phường Láng - Hà Nội',
   venueMapsUrl:
     'https://maps.app.goo.gl/56thoXT8nGCps2odA',
-  dressCode: 'Trang phục tông nhẹ nhàng, thanh lịch (pastel, be, trắng kem).',
+  dressCode: 'Trang phục lịch sự, thoải mái, lồng lộn.',
   rsvpEmail: 'rsvp@ameliaandliam.com',
   rsvpSheetUrl:
     'https://docs.google.com/spreadsheets/d/YOUR_RSVP_SHEET_ID_HERE/edit?usp=sharing',
@@ -28,13 +28,13 @@ export const couple = {
   rsvpFormEndpoint: 'https://script.google.com/macros/s/AKfycbxqLnGzq_4tdjuQaDiO1mCOhBmrt7QnMIk-JBxWDexyWghPei5a2oiD78h4ZI7RL4Pp/exec',
   wishesLink: 'https://example.com/send-wishes',
   giftInfo:
-    'Sự hiện diện của bạn đã là món quà quý giá nhất. Nếu vẫn muốn gửi mừng cưới, bạn có thể chuyển khoản theo thông tin bên dưới để góp phần xây dựng tổ ấm nhỏ của Dương & Linh.',
+    'Sự hiện diện của bạn đã là món quà quý giá nhất. Nếu vẫn muốn gửi mừng cưới, bạn có thể chuyển khoản theo thông tin bên dưới để góp phần xây dựng tổ ấm nhỏ của Linh & Dương.',
   bankDetails: 'STK: XXXX XXXX XXXX · Ngân hàng: ABC',
   giftQrUrl:
     'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=Tran%20Thai%20Duong%20%26%20Nguyen%20Khanh%20Linh%20Wedding%20Gift',
   giftQrImages: [
-    { src: new URL('../assets/qr/duong.jpg', import.meta.url).href, label: 'Dương' },
-    { src: new URL('../assets/qr/linh.jpg', import.meta.url).href, label: 'Linh' }
+    { src: new URL('../assets/qr/linh.jpg', import.meta.url).href, label: 'Linh' },
+    { src: new URL('../assets/qr/duong.jpg', import.meta.url).href, label: 'Dương' }
   ],
   albumImages: albumImagesFromAssets
 };
@@ -43,12 +43,12 @@ export const autoMessages = [
   {
     id: 'welcome-1',
     sender: 'bot',
-    text: `Xin chào, chào mừng bạn đến với đám cưới của ${couple.groomName} & ${couple.brideName}.`
+    text: `Xin chào, chào mừng bạn đến với đám cưới của ${couple.brideName} & ${couple.groomName}.`
   },
   {
     id: 'welcome-2',
     sender: 'bot',
-    text: 'Cuộc trò chuyện nhỏ này sẽ nhẹ nhàng dẫn bạn đi qua câu chuyện tình yêu và mọi thông tin của ngày trọng đại.'
+    text: 'Cuộc trò chuyện nhỏ này sẽ giới thiệu cặp đôi và gửi đến bạn các thông tin quan trọng của ngày trọng đại.'
   },
   {
     id: 'bride-1',
@@ -59,11 +59,6 @@ export const autoMessages = [
     id: 'groom-1',
     sender: 'bot',
     text: `Chú rể ${couple.groomName} - một kỹ sư bảo mật chuyên đóng mọi “cổng” nguy hiểm, nhưng lại mở trọn trái tim cho cô dâu. Đam mê cầu lông để rèn phản xạ, tập Kendo để giữ tinh thần samurai, và sắp tới sẽ học thêm kỹ năng mới: làm chồng chuẩn chỉnh.`
-  },
-  {
-    id: 'story-1',
-    sender: 'bot',
-    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
   },
   {
     id: 'when-where-1',
@@ -104,17 +99,11 @@ export const autoMessages = [
   {
     id: 'closing-1',
     sender: 'bot',
-    text: 'Cảm ơn bạn vì đã là một phần trong câu chuyện của Dương & Linh. Ngày hôm đó sẽ không trọn vẹn nếu thiếu bạn. Chúng mình rất mong được gặp bạn và cùng nhau nâng ly trong ngày 28.03.2026.'
+    text: 'Cảm ơn bạn đã đồng hành cùng Linh & Dương trong ngày trọng đại. Hôn lễ sẽ không trọn vẹn nếu thiếu sự hiện diện của bạn. Chúng mình rất mong được gặp bạn và cùng nhau nâng ly trong ngày 28.03.2026.'
   }
 ];
 
 export const quickReplies = [
-  {
-    id: 'lovestory',
-    label: 'Câu chuyện tình yêu của Dương & Linh',
-    question: 'Câu chuyện tình yêu của Dương & Linh',
-    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu đã rơi, trò chơi kết thúc.'
-  },
   {
     id: 'when',
     label: 'Đám cưới diễn ra khi nào?',
@@ -153,7 +142,7 @@ export const quickReplies = [
     id: 'album',
     label: 'Xem album ảnh cưới',
     question: 'Cho mình xem album ảnh cưới nhé!',
-    answer: 'Dưới đây là một vài khoảnh khắc tiêu biểu của Dương & Linh. Hãy bấm vào từng ảnh để xem nhé!',
+    answer: 'Dưới đây là một vài khoảnh khắc tiêu biểu của Linh & Dương. Hãy bấm vào từng ảnh để xem nhé!',
     type: 'album'
   }
 ];
