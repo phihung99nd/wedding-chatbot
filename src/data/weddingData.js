@@ -61,6 +61,11 @@ export const autoMessages = [
     text: `Chú rể ${couple.groomName} - một kỹ sư bảo mật chuyên đóng mọi “cổng” nguy hiểm, nhưng lại mở trọn trái tim cho cô dâu. Đam mê cầu lông để rèn phản xạ, tập Kendo để giữ tinh thần samurai, và sắp tới sẽ học thêm kỹ năng mới: làm chồng chuẩn chỉnh.`
   },
   {
+    id: 'story-1',
+    sender: 'bot',
+    text: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Đùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
+  },
+  {
     id: 'when-where-1',
     sender: 'bot',
     type: 'dateVenue',
@@ -105,6 +110,12 @@ export const autoMessages = [
 
 export const quickReplies = [
   {
+    id: 'lovestory',
+    label: 'Câu chuyện tình yêu',
+    question: 'Câu chuyện tình yêu của Linh & Dương',
+    answer: 'Họ gặp nhau vào một chiều mùa hè tại quán boardgame, khi chú rể đang còn đèo cô gái khác, nước mắt cô dâu rơi, trò chơi kết thúc. Đùa thôi, họ đã có 1 pha teamwork dominate các team khác, và họ hiểu ra mọi thứ đều có thể được nếu là làm với nhau. Giờ đây, họ mời bạn đứng bên cạnh, chứng kiến khoảnh khắc họ hứa với nhau về tất cả những ngày mai.'
+  },
+  {
     id: 'when',
     label: 'Đám cưới diễn ra khi nào?',
     question: 'Đám cưới diễn ra khi nào?',
@@ -130,14 +141,14 @@ export const quickReplies = [
     answer: 'Bạn vui lòng điền thông tin xác nhận tham dự tại form bên dưới nhé.',
     type: 'rsvpForm'
   },
-  {
-    id: 'gifts',
-    label: 'Thông tin mừng cưới',
-    question: 'Mình có thể gửi mừng cưới như thế nào?',
-    answer: couple.giftInfo,
-    type: 'gifts',
-    showGiftQr: true
-  },
+  // {
+  //   id: 'gifts',
+  //   label: 'Thông tin mừng cưới',
+  //   question: 'Mình có thể gửi mừng cưới như thế nào?',
+  //   answer: couple.giftInfo,
+  //   type: 'gifts',
+  //   showGiftQr: true
+  // },
   {
     id: 'album',
     label: 'Xem album ảnh cưới',
