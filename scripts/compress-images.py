@@ -39,8 +39,9 @@ def compress_image(src: Path):
     new_size = out.stat().st_size / 1024
     print(f"  {src.name} ({old_size:.0f} KB) -> {out.name} ({new_size:.0f} KB)")
 
-    # Remove original
-    src.unlink()
+    # Remove original (skip if source is already .webp and was overwritten in-place)
+    if src != out:
+        src.unlink()
 
 
 def main():
@@ -49,10 +50,10 @@ def main():
         sys.exit(1)
 
     images = sorted(SRC_DIR.glob("*"))
-    images = [f for f in images if f.suffix.lower() in (".jpg", ".jpeg", ".png")]
+    images = [f for f in images if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp")]
 
     if not images:
-        print("No JPG/PNG images found in wed_pic/")
+        print("No JPG/PNG/WebP images found in wed_pic/")
         sys.exit(1)
 
     print(f"Compressing {len(images)} images (max {MAX_LONG_EDGE}px, WebP q{QUALITY})...\n")
