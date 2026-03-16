@@ -29,7 +29,7 @@ export const couple = {
   wishesLink: 'https://example.com/send-wishes',
   giftInfo:
     'Sự hiện diện của bạn đã là món quà quý giá nhất. Nếu vẫn muốn gửi mừng cưới, bạn có thể chuyển khoản theo thông tin bên dưới để góp phần xây dựng tổ ấm nhỏ của Linh & Dương.',
-  bankDetails: 'STK: XXXX XXXX XXXX · Ngân hàng: ABC',
+  // bankDetails: 'STK: XXXX XXXX XXXX · Ngân hàng: ABC',
   giftQrUrl:
     'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=Tran%20Thai%20Duong%20%26%20Nguyen%20Khanh%20Linh%20Wedding%20Gift',
   giftQrImages: [
@@ -141,14 +141,14 @@ export const quickReplies = [
     answer: 'Bạn vui lòng điền thông tin xác nhận tham dự tại form bên dưới nhé.',
     type: 'rsvpForm'
   },
-  // {
-  //   id: 'gifts',
-  //   label: 'Thông tin mừng cưới',
-  //   question: 'Mình có thể gửi mừng cưới như thế nào?',
-  //   answer: couple.giftInfo,
-  //   type: 'gifts',
-  //   showGiftQr: true
-  // },
+  {
+    id: 'gifts',
+    label: 'Thông tin mừng cưới',
+    question: 'Mình có thể gửi mừng cưới như thế nào?',
+    answer: couple.giftInfo,
+    type: 'gifts',
+    showGiftQr: true
+  },
   {
     id: 'album',
     label: 'Xem album ảnh cưới',
